@@ -63,9 +63,64 @@ A computação em nuvem introduz diferentes formas de gerenciar custos:
 | Multicloud     | Médio     | Médio          | Alta           | Alta       | Corporações globais |
 
 ---
+### ☁️ Criação de máquina virtual
 
-📘 **** 
+Resumo baseado no [artigo oficial da Microsoft Learn](https://learn.microsoft.com/pt-br/azure/virtual-machines/windows/quick-create-portal).
 
----
+Este guia rápido mostra como usar o portal do Azure para implantar uma máquina virtual (VM) executando o Windows Server.
+
+### 1. Entrar no Azure
+
+1.  Acesse o [portal do Azure](https://portal.azure.com).
+
+### 2. Criar a Máquina Virtual
+
+1.  Na barra de pesquisa do portal, digite **máquinas virtuais**.
+2.  Em **Serviços**, selecione **Máquinas virtuais**.
+3.  Na página **Máquinas virtuais**, clique em **Criar** e selecione **Máquina virtual do Azure**.
+4.  Na guia **Básico**, configure:
+    * **Grupo de Recursos:** Crie um novo (ex: `myResourceGroup`).
+    * **Nome da máquina virtual:** Dê um nome (ex: `myVM`).
+    * **Região:** Escolha a região desejada.
+    * **Imagem:** Selecione uma imagem (ex: `Windows Server 2022 Datacenter: Azure Edition - x64 Gen 2`).
+    * **Tamanho:** Escolha um tamanho de VM (o padrão de custo mais baixo geralmente é sugerido).
+5.  Em **Conta de administrador**:
+    * Defina um **Nome de usuário** (ex: `azureuser`).
+    * Crie uma **Senha** (deve ter no mínimo 12 caracteres e atender aos requisitos de complexidade).
+6.  Em **Regras de porta de entrada**:
+    * Escolha **Permitir portas selecionadas**.
+    * Selecione **RDP (3389)** e **HTTP (80)** na lista suspensa.
+7.  Clique em **Examinar + criar** na parte inferior da página.
+8.  Após a validação, clique em **Criar**.
+
+### 3. Conectar-se à Máquina Virtual (via RDP)
+
+1.  Após a conclusão da implantação, vá para o recurso da VM.
+2.  Na página de visão geral, selecione **Conectar** > **RDP**.
+3.  Na guia **Conectar-se ao RDP**, mantenha as opções padrão e clique em **Baixar arquivo RDP**.
+4.  Abra o arquivo `.rdp` baixado.
+5.  Clique em **Conectar**.
+6.  Na janela de Segurança do Windows, selecione **Mais opções** e **Usar uma conta diferente**.
+7.  Digite o nome de usuário (ex: `localhost\azureuser`) e a senha que você criou.
+8.  Clique em **Sim** no aviso do certificado para criar a conexão.
+
+### 4. (Opcional) Instalar o servidor Web (IIS)
+
+Para verificar se a VM está respondendo via HTTP:
+
+1.  Dentro da VM, abra um prompt do **PowerShell**.
+2.  Execute o seguinte comando:
+    ```powershell
+    Install-WindowsFeature -name Web-Server -IncludeManagementTools
+    ```
+3.  Após a instalação, abra um navegador (no seu computador local) e digite o **Endereço IP público** da sua VM. Você verá a página de boas-vindas padrão do IIS.
+
+### 5. Limpar os Recursos
+
+Quando não precisar mais da VM, exclua o grupo de recursos para evitar cobranças contínuas.
+
+1.  No portal, vá até o **Grupo de Recursos** que você criou.
+2.  Selecione **Excluir grupo de recursos**.
+3.  Digite o nome do grupo de recursos para confirmar e clique em **Excluir**.
 
 > 💡 *Este repositório tem como objetivo registrar e organizar meus estudos sobre os fundamentos do Microsoft Azure e a certificação AZ-900.*
