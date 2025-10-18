@@ -123,4 +123,68 @@ Quando não precisar mais da VM, exclua o grupo de recursos para evitar cobranç
 2.  Selecione **Excluir grupo de recursos**.
 3.  Digite o nome do grupo de recursos para confirmar e clique em **Excluir**.
 
+---
+## Criar uma Instância Gerenciada de SQL do Azure (Portal)
+
+Resumo baseado no [artigo oficial da Microsoft Learn](https://learn.microsoft.com/pt-br/azure/azure-sql/managed-instance/instance-create-quickstart?view=azuresql&tabs=azure-portal).
+
+Este guia ensina como criar uma Instância Gerenciada de SQL do Azure usando o portal do Azure.
+
+### 1. Entrar no Portal do Azure
+
+1.  Entre no [portal do Azure](https://portal.azure.com).
+2.  Procure por **Instância Gerenciada de SQL do Azure** e selecione **Criar**.
+
+### 2. Configurar a Guia Básico
+
+Preencha as informações essenciais:
+* **Assinatura:** Selecione sua assinatura.
+* **Grupo de Recursos:** Crie um novo ou selecione um existente.
+* **Nome da instância gerenciada:** Insira um nome válido.
+* **Região:** Escolha a região para a implantação.
+* **Método de autenticação:** Escolha "Autenticação do SQL" (ou Microsoft Entra, se preferir).
+* **Logon de administrador:** Defina um nome de usuário (não use `serveradmin`).
+* **Senha:** Crie uma senha forte (mínimo de 16 caracteres).
+
+### 3. Configurar Computação + Armazenamento
+
+1.  Clique em **Configurar instância gerenciada**.
+2.  Escolha a **Camada de Serviço** (ex: "Uso Geral").
+3.  Configure **vCores** e **Armazenamento (GB)** conforme sua necessidade.
+4.  Selecione o modelo de **Licença do SQL Server** (Pagamento conforme o uso ou Benefício Híbrido do Azure).
+5.  Clique em **Aplicar**.
+
+### 4. Configurar a Guia Rede
+
+* **Rede virtual / sub-rede:** Você deve selecionar uma rede virtual e uma sub-rede existentes que atendam aos [requisitos de rede](https://learn.microsoft.com/pt-br/azure/azure-sql/managed-instance/vnet-existing-add-subnet?view=azuresql) para a Instância Gerenciada, ou criar uma nova. A sub-rede deve ser dedicada *exclusivamente* para Instâncias Gerenciadas.
+* **Tipo de conexão:** Mantenha o padrão (Proxy).
+* **Ponto de extremidade público:** Para este início rápido, geralmente é mantido como **Desabilitar**.
+
+### 5. Guias Adicionais (Segurança e Configurações)
+
+* **Guia Segurança:** Você pode deixar os padrões.
+* **Guia Configurações adicionais:**
+    * **Ordenação (Collation):** Deixe o padrão ou escolha uma específica se estiver migrando bancos de dados.
+    * **Fuso horário:** Selecione o fuso horário correto.
+    * **Janela de manutenção:** Escolha o período preferencial para atualizações.
+* **Guias Marcas:** Adicione marcas (tags) se desejar organizar seus recursos (ex: `Ambiente: Estudo`).
+
+### 6. Examinar + Criar
+
+1.  Clique em **Examinar + criar**.
+2.  Revise o resumo das configurações.
+3.  Se a validação for aprovada, clique em **Criar** para iniciar a implantação.
+
+**Nota:** A implantação de uma Instância Gerenciada de SQL pode levar várias horas.
+
+### 7. Monitorar a Implantação
+
+Você pode acompanhar o progresso da implantação clicando no ícone de **Notificações** (o sino) no canto superior direito do portal.
+
+### 8. Recuperar Detalhes da Conexão
+
+1.  Após a conclusão da implantação, vá para o recurso da Instância Gerenciada de SQL.
+2.  Na guia **Visão Geral**, localize a propriedade **Host**.
+3.  Copie este nome de host (ex: `seunome.a1b2c3d4e5f6.database.windows.net`). Você usará este endereço para se conectar à instância a partir de ferramentas como o SQL Server Management Studio (SSMS).
+
 > 💡 *Este repositório tem como objetivo registrar e organizar meus estudos sobre os fundamentos do Microsoft Azure e a certificação AZ-900.*
